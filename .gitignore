@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+.cargo-cache/
+
+# Tauri / Rust build output
+src-tauri/target/
+src-tauri/gen/
+target/
+
+# web build output
+dist/
+build/
+public/lvtu/
+public/vendor/
+
+# Android output
+*.apk
+*.aab
+*.apks
+*.keystore
+*.jks
+
+# large/proprietary assets
+*.zip
+*.wasm
+models.zip
+main.js.original
+main.js.before-api-patch
+
+# logs
+*.log
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
