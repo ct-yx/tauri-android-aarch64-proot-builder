@@ -107,6 +107,8 @@ This adds/updates:
 bash scripts/build-tauri-android-aarch64.sh /path/to/your/tauri-project
 ```
 
+The build script uses a fast Tauri config that reuses existing `dist/` and avoids rerunning the frontend build every time. Rebuild your frontend manually when assets change.
+
 Expected output is usually under:
 
 ```txt

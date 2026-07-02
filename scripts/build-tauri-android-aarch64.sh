@@ -50,6 +50,6 @@ env -i \
   ANDROID_NDK_HOME="$NDK_HOME" \
   PATH="$HOME/.cargo/bin:/root/gradle/gradle-8.7/bin:$ANDROID_CLEAN_HOME/cmdline-tools/latest/bin:$ANDROID_CLEAN_HOME/platform-tools:$ANDROID_CLEAN_HOME/build-tools/$BUILD_TOOLS_VERSION:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
   CI=true \
-  ./node_modules/.bin/tauri android build --debug --apk --target aarch64 --ci
+  ./node_modules/.bin/tauri android build --debug --apk --target aarch64 --ci --config src-tauri/tauri.android.fast.conf.json
 
 find src-tauri/gen/android/app/build/outputs/apk -name '*.apk' -print 2>/dev/null || true

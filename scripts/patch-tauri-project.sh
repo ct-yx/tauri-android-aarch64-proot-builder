@@ -37,8 +37,31 @@ if [ -f src-tauri/gen/android/gradle.properties ]; then
   else
     printf '\nandroid.aapt2FromMavenOverride=%s/build-tools/%s/aapt2\n' "$ANDROID_CLEAN_HOME" "$BUILD_TOOLS_VERSION" >> src-tauri/gen/android/gradle.properties
   fi
+  for line in \
+    "org.gradle.daemon=true" \
+    "org.gradle.caching=true" \
+    "org.gradle.parallel=false" \
+    "kotlin.incremental=true"; do
+    key="${line%%=*}"
+    if grep -q "^$key=" src-tauri/gen/android/gradle.properties; then
+      sed -i "s#^$key=.*#$line#" src-tauri/gen/android/gradle.properties
+    else
+      printf '%s\n' "$line" >> src-tauri/gen/android/gradle.properties
+    fi
+  done
   echo "patched src-tauri/gen/android/gradle.properties"
 fi
+
+cat > src-tauri/tauri.android.fast.conf.json <<'EOF'
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "build": {
+    "beforeBuildCommand": "",
+    "frontendDist": "../dist"
+  }
+}
+EOF
+echo "created src-tauri/tauri.android.fast.conf.json"
 
 APP_GRADLE="src-tauri/gen/android/app/build.gradle.kts"
 if [ -f "$APP_GRADLE" ]; then
